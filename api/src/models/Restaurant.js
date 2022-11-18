@@ -1,11 +1,7 @@
 import mongoose from "mongoose";
-const HotelSchema = new mongoose.Schema(
+const RestaurantSchema = new mongoose.Schema(
   {
     name: {
-      type: String,
-      required: true,
-    },
-    type: {
       type: String,
       required: true,
     },
@@ -37,16 +33,10 @@ const HotelSchema = new mongoose.Schema(
       min: 0,
       max: 5,
     },
-    rooms: {
-      type: [String],
-    },
-    cheapestPrice: {
-      type: Number,
+    hotels: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Hotel",
       required: true,
-    },
-    featured: {
-      type: Boolean,
-      default: false,
     },
     users: {
       type: mongoose.Schema.Types.ObjectId,
@@ -57,4 +47,4 @@ const HotelSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-export default mongoose.model("Hotel", HotelSchema);
+export default mongoose.model("Restaurant", RestaurantSchema);

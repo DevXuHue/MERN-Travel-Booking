@@ -12,6 +12,7 @@ import authRoute from "./src/routes/auth.js";
 import usersRoute from "./src/routes/users.js";
 import hotelsRoute from "./src/routes/hotels.js";
 import roomsRoute from "./src/routes/rooms.js";
+import restaurantRoute from "./src/routes/restaurant.js";
 
 const app = express();
 
@@ -33,18 +34,19 @@ app.use("/api/auth", authRoute);
 app.use("/api/users", usersRoute);
 app.use("/api/hotels", hotelsRoute);
 app.use("/api/rooms", roomsRoute);
+app.use("/api/restaurants", restaurantRoute);
 
 app.use((err, req, res, next) => {
-   const errorStatus = err.status || 500;
-   const errorMessage = err.message || "Something went wrong!";
-   return res.status(errorStatus).json({
-      success: false,
-      status: errorStatus,
-      message: errorMessage,
-      stack: err.stack,
-   });
+  const errorStatus = err.status || 500;
+  const errorMessage = err.message || "Something went wrong!";
+  return res.status(errorStatus).json({
+    success: false,
+    status: errorStatus,
+    message: errorMessage,
+    stack: err.stack,
+  });
 });
 
 app.listen(PORT, () => {
-   console.log(`server is running on port http://localhost:${PORT}`);
+  console.log(`server is running on port http://localhost:${PORT}`);
 });
