@@ -1,4 +1,6 @@
+import { Link } from "react-router-dom";
 import useFetch from "../../hooks/useFetch";
+import Loading from "../Loading";
 import "./propertyList.css";
 
 const PropertyList = () => {
@@ -14,12 +16,13 @@ const PropertyList = () => {
   return (
     <div className="mx-auto w-full max-w-[1024px] grid lg:grid-cols-4 gap-4 md:grid-cols-3 grid-cols-2 ">
       {loading ? (
-        "loading"
+        <Loading />
       ) : (
         <>
           {data &&
             images.map((img, i) => (
-              <div
+              <Link
+                to={`/hotels/type/${data[i]?.type}`}
                 className="flex gap-2 flex-col cursor-pointer hover:scale-105 transition-all duration-150"
                 key={i}
               >
@@ -36,7 +39,7 @@ const PropertyList = () => {
                     {data[i]?.count} {data[i]?.type}
                   </h2>
                 </div>
-              </div>
+              </Link>
             ))}
         </>
       )}

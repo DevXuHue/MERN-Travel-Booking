@@ -8,6 +8,7 @@ import MailList from "../../components/mailList/MailList";
 import Navbar from "../../components/navbar/Navbar";
 import PropertyList from "../../components/propertyList/PropertyList";
 import { AuthContext } from "../../context/AuthContext";
+import Loading from "../../components/Loading";
 import "./home.css";
 
 import BannerImgs from "../../assets/images/banner2.jpg";
@@ -19,11 +20,16 @@ const Home = () => {
     if (user?.isAdmin) {
       window.location.href = "https://localhost:3001";
     }
+
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
   }, [user, navigate]);
   return (
     <>
       {loading ? (
-        <h1>Loading...</h1>
+        <Loading />
       ) : (
         <div className="bg-slate-200">
           <Navbar />

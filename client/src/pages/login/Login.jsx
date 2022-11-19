@@ -36,7 +36,7 @@ const Login = () => {
   useEffect(() => {
     if (user) {
       navigate("/");
-      toast.success("Bạn đã đăng nhập rồi vào cc");
+      toast.success("Bạn đã đăng nhập rồi!!!");
     }
   }, [user, navigate]);
 

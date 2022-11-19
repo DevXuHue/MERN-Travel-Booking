@@ -13,7 +13,7 @@ import { useContext, useState } from "react";
 import "react-date-range/dist/styles.css"; // main css file
 import "react-date-range/dist/theme/default.css"; // theme css file
 import { format } from "date-fns";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { SearchContext } from "../../context/SearchContext";
 import { AuthContext } from "../../context/AuthContext";
 
@@ -61,26 +61,61 @@ const Header = ({ type }) => {
         }
       >
         <div className="headerList">
-          <div className="headerListItem active">
+          <NavLink
+            to="/home"
+            className={({ isActive }) =>
+              isActive
+                ? "headerListItem cursor-pointer active"
+                : "headerListItem cursor-pointer"
+            }
+          >
             <FontAwesomeIcon icon={faBed} />
             <span>Lưu trú</span>
-          </div>
-          <div className="headerListItem">
-            <FontAwesomeIcon icon={faPlane} />
-            <span>Chuyến bay</span>
-          </div>
-          <div className="headerListItem">
-            <FontAwesomeIcon icon={faCar} />
-            <span>Thuê xe</span>
-          </div>
-          <div className="headerListItem">
+          </NavLink>
+          <NavLink
+            to="/hotels"
+            className={({ isActive }) =>
+              isActive
+                ? "headerListItem cursor-pointer active"
+                : "headerListItem cursor-pointer"
+            }
+          >
             <FontAwesomeIcon icon={faBed} />
             <span>Địa điểm tham quan</span>
-          </div>
-          <div className="headerListItem">
-            <FontAwesomeIcon icon={faTaxi} />
-            <span>Taxi sân bay</span>
-          </div>
+          </NavLink>
+          <NavLink
+            to="/fly"
+            className={({ isActive }) =>
+              isActive
+                ? "headerListItem cursor-pointer active"
+                : "headerListItem cursor-pointer"
+            }
+          >
+            <FontAwesomeIcon icon={faPlane} />
+            <span>Chuyến bay</span>
+          </NavLink>
+          <NavLink
+            to="/restaurants"
+            className={({ isActive }) =>
+              isActive
+                ? "headerListItem cursor-pointer active"
+                : "headerListItem cursor-pointer"
+            }
+          >
+            <FontAwesomeIcon icon={faCar} />
+            <span>Quán ăn</span>
+          </NavLink>
+          <NavLink
+            to="/bookingcar"
+            className={({ isActive }) =>
+              isActive
+                ? "headerListItem cursor-pointer active"
+                : "headerListItem cursor-pointer"
+            }
+          >
+            <FontAwesomeIcon icon={faCar} />
+            <span>Thuê xe</span>
+          </NavLink>
         </div>
         {type !== "list" && (
           <>
