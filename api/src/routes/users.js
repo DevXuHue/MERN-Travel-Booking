@@ -9,6 +9,9 @@ import { verifyAdmin, verifyToken, verifyUser } from "../utils/verifyToken.js";
 
 const router = express.Router();
 
+//GET ALL
+router.get("/", verifyToken, verifyAdmin, getUsers);
+
 router.get("/checkauthentication", verifyToken, (req, res, next) => {
     res.send("hello user, you are logged in");
 });
@@ -29,8 +32,5 @@ router.delete("/:id", verifyUser, deleteUser);
 
 //GET
 router.get("/:id", verifyUser, getUser);
-
-//GET ALL
-router.get("/", verifyAdmin, getUsers);
 
 export default router;

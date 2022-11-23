@@ -6,7 +6,7 @@ import userRouter from "./users.js";
 import restaurantRouter from "./restaurant.js";
 
 const router = express.Router();
-router.use("/auth", authRouter);
+router.use("/auth/", authRouter);
 router.use("/hotels/", hotelRouter);
 router.use("/rooms/", roomRouter);
 router.use("/users/", userRouter);
