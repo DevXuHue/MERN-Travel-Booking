@@ -11,17 +11,26 @@ import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
 import SettingsSystemDaydreamOutlinedIcon from "@mui/icons-material/SettingsSystemDaydreamOutlined";
 import PsychologyOutlinedIcon from "@mui/icons-material/PsychologyOutlined";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
+import RestaurantIcon from "@mui/icons-material/Restaurant";
 import { Link } from "react-router-dom";
 import { DarkModeContext } from "../../context/darkModeContext";
 import { useContext } from "react";
+import toast from "react-hot-toast";
+import { AuthContext } from "../../context/AuthContext";
 
 const Sidebar = () => {
   const { dispatch } = useContext(DarkModeContext);
+  const { user, dispatch: dispathcAuth } = useContext(AuthContext);
+  const handleLogout = async () => {
+    dispathcAuth({ type: "LOGOUT" });
+    toast.success("Logout successfully");
+  };
+
   return (
     <div className="sidebar">
       <div className="top">
         <Link to="/" style={{ textDecoration: "none" }}>
-          <span className="logo">lamadmin</span>
+          <span className="logo">{user?.username.toUpperCase()} Admin</span>
         </Link>
       </div>
       <hr />
@@ -37,6 +46,12 @@ const Sidebar = () => {
             <li>
               <PersonOutlineIcon className="icon" />
               <span>Users</span>
+            </li>
+          </Link>
+          <Link to="/restaurants" style={{ textDecoration: "none" }}>
+            <li>
+              <RestaurantIcon className="icon" />
+              <span>Restaurants</span>
             </li>
           </Link>
           <Link to="/hotels" style={{ textDecoration: "none" }}>
@@ -82,7 +97,7 @@ const Sidebar = () => {
             <AccountCircleOutlinedIcon className="icon" />
             <span>Profile</span>
           </li>
-          <li>
+          <li onClick={handleLogout}>
             <ExitToAppIcon className="icon" />
             <span>Logout</span>
           </li>

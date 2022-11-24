@@ -12,22 +12,28 @@ import { AuthContext } from "./context/AuthContext";
 import { hotelColumns, roomColumns, userColumns } from "./datatablesource";
 import NewHotel from "./pages/newHotel/NewHotel";
 import NewRoom from "./pages/newRoom/NewRoom";
+import { Toaster } from "react-hot-toast";
 
 function App() {
   const { darkMode } = useContext(DarkModeContext);
 
   const ProtectedRoute = ({ children }) => {
-    const { user } = useContext(AuthContext);
+    const { user, loading } = useContext(AuthContext);
 
-    if (!user) {
-      return <Navigate to="/login" />;
-    }
-
-    return children;
+    return (
+      <>
+        {loading ? (
+          <p>Loading ...</p>
+        ) : (
+          <>{user?.email ? children : <Navigate to="/login" />}</>
+        )}
+      </>
+    );
   };
 
   return (
     <div className={darkMode ? "app dark" : "app"}>
+      <Toaster position="top-center" reverseOrder={false} />
       <BrowserRouter>
         <Routes>
           <Route path="/">
@@ -66,6 +72,14 @@ function App() {
                 }
               />
             </Route>
+            <Route
+              path="/restaurants"
+              element={
+                <ProtectedRoute>
+                  <List columns={hotelColumns} />
+                </ProtectedRoute>
+              }
+            />
             <Route path="hotels">
               <Route
                 index
@@ -75,6 +89,7 @@ function App() {
                   </ProtectedRoute>
                 }
               />
+
               <Route
                 path=":productId"
                 element={
@@ -87,7 +102,7 @@ function App() {
                 path="new"
                 element={
                   <ProtectedRoute>
-                    <NewHotel  />
+                    <NewHotel />
                   </ProtectedRoute>
                 }
               />
@@ -113,7 +128,7 @@ function App() {
                 path="new"
                 element={
                   <ProtectedRoute>
-                    <NewRoom  />
+                    <NewRoom />
                   </ProtectedRoute>
                 }
               />
