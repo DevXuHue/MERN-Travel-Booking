@@ -9,8 +9,17 @@ import Restaurants from "./pages/restaurants";
 import HotelsByType from "./pages/hotelsbytype";
 import RautaurantDetails from "./pages/restaurantDetails";
 import NotFound from "./pages/notfound";
+import InfoRegisterHotel from "./pages/infoRegisterHotel";
+import { useEffect } from "react";
 
 function App() {
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "smooth",
+    });
+  }, []);
   return (
     <BrowserRouter>
       <Routes>
@@ -23,6 +32,7 @@ function App() {
         <Route path="/restaurants" element={<Restaurants />} />
         <Route path="/restaurant/:id" element={<RautaurantDetails />} />
         <Route path="/hotels/:id" element={<Hotel />} />
+        <Route path="/registerhotel/:id" element={<InfoRegisterHotel />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
