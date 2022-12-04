@@ -9,6 +9,7 @@ const Input = ({
   type = "text",
   row = 4,
   dataSelect,
+  min,
   multible = false,
 }) => {
   if (as === "textarea") {
@@ -94,6 +95,7 @@ const Input = ({
         <input
           type={type}
           id={name}
+          min={min}
           placeholder={placeholder}
           name={name}
           value={value}

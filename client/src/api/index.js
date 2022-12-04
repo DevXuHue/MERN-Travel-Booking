@@ -4,8 +4,8 @@ const clientAxios = axios.create({
   baseURL: "http://localhost:8800/api/",
   headers: {
     "Content-Type": "application/json",
-    withCredentials: true,
   },
+  withCredentials: true,
 });
 
 clientAxios.interceptors.request.use(

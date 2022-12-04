@@ -6,14 +6,18 @@ import { useEffect, useState } from "react";
 import useFetch from "../../hooks/useFetch";
 import axios from "axios";
 
-const Datatable = ({columns}) => {
+const Datatable = ({ columns }) => {
   const location = useLocation();
   const path = location.pathname.split("/")[1];
   const [list, setList] = useState();
   const { data, loading, error } = useFetch(`/${path}`);
 
   useEffect(() => {
-    setList(data);
+    if (path === "restaurants") {
+      setList(data?.restaurants);
+    } else {
+      setList(data);
+    }
   }, [data]);
 
   const handleDelete = async (id) => {
@@ -53,15 +57,17 @@ const Datatable = ({columns}) => {
           Add New
         </Link>
       </div>
-      <DataGrid
-        className="datagrid"
-        rows={list}
-        columns={columns.concat(actionColumn)}
-        pageSize={9}
-        rowsPerPageOptions={[9]}
-        checkboxSelection
-        getRowId={(row) => row._id}
-      />
+      {list?.length && (
+        <DataGrid
+          className="datagrid"
+          rows={list}
+          columns={columns.concat(actionColumn)}
+          pageSize={9}
+          rowsPerPageOptions={[9]}
+          checkboxSelection
+          getRowId={(row) => row._id}
+        />
+      )}
     </div>
   );
 };
